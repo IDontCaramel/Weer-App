@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="map" Height="1080" Width="800">
     <Grid>
-        <Image x:Name="nlImage" HorizontalAlignment="Left" Height="1100" VerticalAlignment="Top" Width="875" Source="/nederland.jpg" MouseDown="nlImage_Mouse_Down"/>
+        <Image x:Name="nlImage" HorizontalAlignment="Left" Height="937" VerticalAlignment="Top" Width="712" Source="/nederland.jpg" MouseDown="nlImage_Mouse_Down" Margin="0,-46,0,0"/>
 
     </Grid>
 </Window>
