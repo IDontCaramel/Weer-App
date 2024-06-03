@@ -7,7 +7,7 @@ namespace WeatherApp2
 {
     public partial class map : Window
     {
-        public string City { get; set; }
+        public static string City { get; set; }
         public map()
         {
             InitializeComponent();
