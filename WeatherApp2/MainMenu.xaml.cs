@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static WeatherData;
+using System.Reflection;
+
+
 
 namespace WeatherApp2
 {
@@ -19,43 +24,93 @@ namespace WeatherApp2
     /// </summary>
     public partial class MainMenu : Window
     {
+
         public MainMenu()
         {
             InitializeComponent();
+
+            LoadWeatherData();
         }
 
-        public void UpdateData()
+        public void updateMenu()
         {
             var liveWeather = WeatherData.LiveWeather;
-            var weeklyForecast = WeatherData.WeeklyForecast;
-            var hourlyForecasts = WeatherData.HourlyForecasts;
+            DailyForecast currentDay = WeatherData.GetDailyForecastByIndex(0);
+            DailyForecast day1 = WeatherData.GetDailyForecastByIndex(1);
+            DailyForecast day2 = WeatherData.GetDailyForecastByIndex(2);
+            DailyForecast day3 = WeatherData.GetDailyForecastByIndex(3);
+            DailyForecast day4 = WeatherData.GetDailyForecastByIndex(4);
 
-            temp.Content = liveWeather.Temp.ToString();
-            //tempMinMax.Content = $"{weeklyForecast(0).}}"
+            temp.Content = liveWeather.temp;
+            tempMinMax.Content = $"{currentDay.min_temp}/{currentDay.max_temp}";
+
 
         }
+
+
+        private void updateDaily()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                // Find the labels by name using the FindName method
+                Label dailyTemp = (Label)this.FindName("dailyTemp" + i);
+                Label dailyRain = (Label)this.FindName("dailyRain" + i);
+                Label dailyDay = (Label)this.FindName("dailyDay" + i);
+
+                var currentDay = WeatherData.GetDailyForecastByIndex(i+1);
+
+                DateTime currentDate = DateTime.Now.AddDays(i+1);
+
+                // Modify the labels
+                if (dailyTemp != null)
+                    dailyTemp.Content = $"{currentDay.min_temp}/{currentDay.max_temp}";
+
+                if (dailyRain != null)
+                    dailyRain.Content = $"%{currentDay.neersl_perc_dag}";
+
+                if (dailyDay != null)
+                    dailyDay.Content = currentDate.ToString("ddd"); ;
+            }
+        }
+
+        private void updateHourly()
+        {
+            DateTime currentTime = DateTime.Now;
+            int roundedHour = currentTime.Minute >= 59 ? currentTime.Hour + 1 : currentTime.Hour;
+
+
+
+
+            for (int i = 0; i < 8; i++)
+            {
+                // Find the labels by name using the FindName method
+                Label tempLabel = (Label)this.FindName("tempList" + i);
+                Label timeLabel = (Label)this.FindName("timeList" + i);
+
+                // Modify the labels
+                if (tempLabel != null)
+                    tempLabel.Content = WeatherData.GetHourlyForecastByHour(roundedHour+i).temp;
+
+                if (timeLabel != null)
+                    timeLabel.Content =  $"{roundedHour+ i}:00";
+            }
+
+
+
+        }
+
 
         private async void LoadWeatherData()
         {
             string place = inputPlace.Text.Trim().ToLower();
 
-            bool success = await WeatherData.FetchWeatherData("demo", place);
+            bool success = await WeatherData.FetchWeatherData("demo", "Amsterdam");
 
             if (success)
             {
-                // Data was successfully fetched
-                var forecastForHour9 = WeatherData.GetHourlyForecastByHour(9);
-
-                // Use the forecast data as needed
-                if (forecastForHour9 != null)
-                {
-                    Console.WriteLine($"Temperature at 9:00: {forecastForHour9.Temperature}°C");
-                    Console.WriteLine($"Weather at 9:00: {forecastForHour9.Image}");
-                }
-                else
-                {
-                    Console.WriteLine("No forecast available for 9:00.");
-                }
+                updateMenu();
+                updateHourly();
+                updateDaily();
             }
             else
             {
@@ -69,6 +124,5 @@ namespace WeatherApp2
             map mapWindow = new map();
             mapWindow.Show();
         }
-
     }
 }
