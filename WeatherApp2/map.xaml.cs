@@ -7,6 +7,7 @@ namespace WeatherApp2
 {
     public partial class map : Window
     {
+        public string City { get; set; }
         public map()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace WeatherApp2
             public double y { get; set; }
             public double perX { get; set; }
             public double perY { get; set; }
+
+           
         }
 
         public class CoordinateProjection
@@ -78,7 +81,7 @@ namespace WeatherApp2
         private void nlImage_Mouse_Down(object sender, MouseButtonEventArgs e)
         {
             Point clickPoint = e.GetPosition(nlImage);
-    /*        MessageBox.Show(clickPoint.ToString());*/
+            MessageBox.Show(clickPoint.ToString());
             planet(clickPoint.X, clickPoint.Y);
         }
 
@@ -86,8 +89,8 @@ namespace WeatherApp2
         {
             var p0 = new ReferencePoint
             {
-                scrX = 272,       // Minimum X position on screen
-                scrY = 410,        // Minimum Y position on screen
+                scrX = 249,       // Minimum X position on screen
+                scrY = 374,        // Minimum Y position on screen
                 lat = 52.3295182f,   // Latitude
                 lng = 4.9227935f    // Longitude
             };
@@ -95,8 +98,8 @@ namespace WeatherApp2
             // Bottom-right reference point
             var p1 = new ReferencePoint
             {
-                scrX = 392,         // Maximum X position on screen
-                scrY = 785,       // Maximum Y position on screen
+                scrX = 360,         // Maximum X position on screen
+                scrY = 716,       // Maximum Y position on screen
                 lat = 50.8234882f,   // Latitude
                 lng = 5.706143f   // Longitude
             };
@@ -113,6 +116,7 @@ namespace WeatherApp2
             // Find the closest location
             var closestCity = FindClosestCity(latlng.Item1, latlng.Item2);
             MessageBox.Show($"Closest City: {closestCity.Key}, Coordinates: ({closestCity.Value.X}, {closestCity.Value.Y}, lattuide: {latlng.Item1}, Longitude: {latlng.Item2})");
+            City = closestCity.Key;
         }
 
         // Haversine distance calculation

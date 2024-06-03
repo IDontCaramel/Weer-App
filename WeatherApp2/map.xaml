@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherApp2"
         mc:Ignorable="d"
-        Title="map" Height="1080" Width="800">
+        Title="map" Height="1053" Width="793">
     <Grid>
-        <Image x:Name="nlImage" HorizontalAlignment="Left" Height="937" VerticalAlignment="Top" Width="712" Source="/nederland.jpg" MouseDown="nlImage_Mouse_Down" Margin="0,-46,0,0"/>
+        <Image x:Name="nlImage" HorizontalAlignment="Left" Height="857" VerticalAlignment="Top" Width="724" Source="/nederland.jpg" MouseDown="nlImage_Mouse_Down"/>
 
     </Grid>
 </Window>
