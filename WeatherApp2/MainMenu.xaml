@@ -15,26 +15,26 @@
 
         </Rectangle>
         <Grid HorizontalAlignment="Center" Height="111" Margin="0,646,0,0" VerticalAlignment="Top" Width="812">
-            <Label x:Name="tempList1" Content="99°" Margin="100,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList1" Content="99°" Margin="105,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList1" Content="13:00" Margin="107,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList2" Content="99°" Margin="200,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList2" Content="99°" Margin="205,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList2" Content="13:00" Margin="207,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList3" Content="99°" Margin="300,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList3" Content="99°" Margin="305,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList3" Content="13:00" Margin="307,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList4" Content="99°" FontSize="60" FontFamily="Century Gothic" Height="71" Margin="400,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList4" Content="99°" FontSize="55" FontFamily="Century Gothic" Height="71" Margin="405,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList4" Content="13:00" Margin="407,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList5" Content="99°" Margin="500,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList5" Content="99°" Margin="505,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList5" Content="13:00" Margin="507,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList6" Content="99°" Margin="600,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList6" Content="99°" Margin="605,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList6" Content="13:00" Margin="607,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList7" Content="99°" Margin="700,0,0,0" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList7" Content="99°" Margin="705,0,0,0" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Label x:Name="timeList7" Content="13:00" Margin="707,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="tempList0" Content="99°" FontSize="60" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name="tempList0" Content="99°" FontSize="55" FontFamily="Century Gothic" Height="71" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"/>
             <Label x:Name="timeList0" Content="13:00" Margin="7,64,0,0" FontSize="30" FontFamily="Century Gothic" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Grid>
-        <TextBox x:Name="inputDelay" HorizontalAlignment="Left" Margin="1725,26,0,0" TextWrapping="Wrap" Text="999" VerticalAlignment="Top" Width="108" FontFamily="Century Gothic" FontSize="60" BorderBrush="Black"/>
-        <Button x:Name="delayUp" Content="^" HorizontalAlignment="Left" Margin="1849,26,0,0" VerticalAlignment="Top" Height="40" Width="40" FontWeight="Bold" FontSize="36"/>
+        <TextBox x:Name="inputDelay" HorizontalAlignment="Left" Margin="1725,26,0,0" TextWrapping="Wrap" Text="999" VerticalAlignment="Top" Width="108" FontFamily="Century Gothic" FontSize="60" BorderBrush="Black" KeyDown="inputDelay_KeyDown" LostFocus="inputDelay_LostFocus"/>
+        <Button x:Name="delayUp" Content="^" HorizontalAlignment="Left" Margin="1849,26,0,0" VerticalAlignment="Top" Height="40" Width="40" FontWeight="Bold" FontSize="36" Click="delayUp_Click"/>
         <Button x:Name="delayDown" Content="^" HorizontalAlignment="Left" Margin="1849,66,0,0" VerticalAlignment="Top" Height="40" Width="40" FontWeight="Bold" FontSize="36" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
