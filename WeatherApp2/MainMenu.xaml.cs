@@ -14,14 +14,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static WeatherData;
 using System.Reflection;
+using System.ComponentModel;
 
 
 
 namespace WeatherApp2
 {
-    /// <summary>
-    /// Interaction logic for MainMenu.xaml
-    /// </summary>
+    
     public partial class MainMenu : Window
     {
 
@@ -36,12 +35,9 @@ namespace WeatherApp2
         {
             var liveWeather = WeatherData.LiveWeather;
             DailyForecast currentDay = WeatherData.GetDailyForecastByIndex(0);
-            DailyForecast day1 = WeatherData.GetDailyForecastByIndex(1);
-            DailyForecast day2 = WeatherData.GetDailyForecastByIndex(2);
-            DailyForecast day3 = WeatherData.GetDailyForecastByIndex(3);
-            DailyForecast day4 = WeatherData.GetDailyForecastByIndex(4);
 
-            temp.Content = liveWeather.temp;
+
+            temp.Content = $"{liveWeather.temp}";
             tempMinMax.Content = $"{currentDay.min_temp}/{currentDay.max_temp}";
 
 
@@ -89,7 +85,7 @@ namespace WeatherApp2
 
                 // Modify the labels
                 if (tempLabel != null)
-                    tempLabel.Content = WeatherData.GetHourlyForecastByHour(roundedHour+i).temp;
+                    tempLabel.Content = $"{WeatherData.GetHourlyForecastByHour(roundedHour+i).temp}°";
 
                 if (timeLabel != null)
                     timeLabel.Content =  $"{roundedHour+ i}:00";
@@ -102,9 +98,10 @@ namespace WeatherApp2
 
         private async void LoadWeatherData()
         {
+
             string place = inputPlace.Text.Trim().ToLower();
 
-            bool success = await WeatherData.FetchWeatherData("demo", "Amsterdam");
+            bool success = await WeatherData.FetchWeatherData("demo", place);
 
             if (success)
             {
@@ -122,7 +119,15 @@ namespace WeatherApp2
         private void btnMap_Click(object sender, RoutedEventArgs e)
         {
             map mapWindow = new map();
+            mapWindow.Closing += mapWindow_OnWindowClosing; // Subscribe to the Closing event
             mapWindow.Show();
         }
+
+        private void mapWindow_OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            inputPlace.Text = map.City;
+            LoadWeatherData();
+        }
+
     }
 }
