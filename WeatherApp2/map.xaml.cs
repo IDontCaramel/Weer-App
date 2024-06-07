@@ -83,14 +83,16 @@ namespace WeatherApp2
             Point clickPoint = e.GetPosition(nlImage);
             MessageBox.Show(clickPoint.ToString());
             planet(clickPoint.X, clickPoint.Y);
+
+            this.Close();
         }
 
         private void planet(double x, double y)
         {
             var p0 = new ReferencePoint
             {
-                scrX = 249,       // Minimum X position on screen
-                scrY = 374,        // Minimum Y position on screen
+                scrX = 309,       // Minimum X position on screen
+                scrY = 465,        // Minimum Y position on screen
                 lat = 52.3295182f,   // Latitude
                 lng = 4.9227935f    // Longitude
             };
@@ -98,8 +100,8 @@ namespace WeatherApp2
             // Bottom-right reference point
             var p1 = new ReferencePoint
             {
-                scrX = 360,         // Maximum X position on screen
-                scrY = 716,       // Maximum Y position on screen
+                scrX = 446,         // Maximum X position on screen
+                scrY = 888,       // Maximum Y position on screen
                 lat = 50.8234882f,   // Latitude
                 lng = 5.706143f   // Longitude
             };

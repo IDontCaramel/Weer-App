@@ -35,6 +35,8 @@ namespace WeatherApp2
             delay = int.Parse(inputDelay.Text);
             LoadWeatherData();
 
+            inputDelay.MaxLength = 3; 
+
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMinutes(delay);
@@ -147,13 +149,17 @@ namespace WeatherApp2
 
         private void delayUp_Click(object sender, RoutedEventArgs e)
         {
-            delay++;
+            if (delay <= 999) { delay++; }
             inputDelay.Text = delay.ToString();
+            TimeSpan.FromMinutes(delay);
+            checkDelay();
         }
         private void delayDown_Click(object sender, RoutedEventArgs e)
         {
-            delay--;
+            if (delay >= 15 ) { delay--; }
             inputDelay.Text = delay.ToString();
+            TimeSpan.FromMinutes(delay);
+            checkDelay();
         }
 
         private void inputDelay_KeyDown(object sender, KeyEventArgs e)
@@ -164,10 +170,31 @@ namespace WeatherApp2
             }
         }
 
-        private void inputDelay_LostFocus(object sender, RoutedEventArgs e)
-        {
-            delay = int.Parse(inputDelay.Text);
+        
 
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            LoadWeatherData();
+        }
+
+        
+
+        private void checkDelay()
+        {
+            try
+            {
+                delay = int.Parse(inputDelay.Text);
+            }
+            catch
+            {
+
+            }
+
+            if (inputDelay.Text.Length > 3)
+            {
+                inputDelay.Text = "999";
+            }
 
             if (delay < 15)
             {
@@ -177,20 +204,18 @@ namespace WeatherApp2
             {
                 inputDelay.Text = "999";
             }
+
+            TimeSpan.FromMinutes(delay);
         }
 
+        private void inputDelay_LostFocus(object sender, RoutedEventArgs e)
+        {
+            checkDelay();
+        }
 
-
-
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             LoadWeatherData();
         }
-
-
-
-
-
     }
 }
