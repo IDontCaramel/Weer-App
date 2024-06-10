@@ -81,7 +81,7 @@ namespace WeatherApp2
         private void nlImage_Mouse_Down(object sender, MouseButtonEventArgs e)
         {
             Point clickPoint = e.GetPosition(nlImage);
-            MessageBox.Show(clickPoint.ToString());
+            //MessageBox.Show(clickPoint.ToString());
             planet(clickPoint.X, clickPoint.Y);
 
             this.Close();
@@ -117,7 +117,7 @@ namespace WeatherApp2
 
             // Find the closest location
             var closestCity = FindClosestCity(latlng.Item1, latlng.Item2);
-            MessageBox.Show($"Closest City: {closestCity.Key}, Coordinates: ({closestCity.Value.X}, {closestCity.Value.Y}, lattuide: {latlng.Item1}, Longitude: {latlng.Item2})");
+            //MessageBox.Show($"Closest City: {closestCity.Key}, Coordinates: ({closestCity.Value.X}, {closestCity.Value.Y}, lattuide: {latlng.Item1}, Longitude: {latlng.Item2})");
             City = closestCity.Key;
         }
 

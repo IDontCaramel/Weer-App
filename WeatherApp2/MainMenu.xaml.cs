@@ -37,6 +37,7 @@ namespace WeatherApp2
 
             inputDelay.MaxLength = 3; 
 
+            //create timer
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMinutes(delay);
@@ -52,18 +53,18 @@ namespace WeatherApp2
             DailyForecast currentDay = WeatherData.GetDailyForecastByIndex(0);
 
 
-            temp.Content = $"{liveWeather.temp}";
+            temp.Content = $"{liveWeather.temp}°";
             tempMinMax.Content = $"{currentDay.min_temp}/{currentDay.max_temp}";
 
 
         }
 
-
+        // updates the daily temps
         private void updateDaily()
         {
             for (int i = 0; i < 4; i++)
             {
-                // Find the labels by name using the FindName method
+                // find the labels by name using the FindName method
                 Label dailyTemp = (Label)this.FindName("dailyTemp" + i);
                 Label dailyRain = (Label)this.FindName("dailyRain" + i);
                 Label dailyDay = (Label)this.FindName("dailyDay" + i);
@@ -72,7 +73,7 @@ namespace WeatherApp2
 
                 DateTime currentDate = DateTime.Now.AddDays(i + 1);
 
-                // Modify the labels
+                // modify the labels
                 if (dailyTemp != null)
                     dailyTemp.Content = $"{currentDay.min_temp}/{currentDay.max_temp}";
 
@@ -84,6 +85,7 @@ namespace WeatherApp2
             }
         }
 
+        // updates the hourly temps
         private void updateHourly()
         {
             DateTime currentTime = DateTime.Now;
@@ -94,7 +96,7 @@ namespace WeatherApp2
 
             for (int i = 0; i < 8; i++)
             {
-                // Find the labels by name using the FindName method
+                // find the labels by name using the FindName method
                 Label tempLabel = (Label)this.FindName("tempList" + i);
                 Label timeLabel = (Label)this.FindName("timeList" + i);
 
@@ -110,13 +112,14 @@ namespace WeatherApp2
 
         }
 
-
+        // makes a request to the api and starts the data update
         private async void LoadWeatherData()
         {
 
             string place = inputPlace.Text.Trim().ToLower();
 
-            bool success = await WeatherData.FetchWeatherData("demo", place);
+            // makes api request
+            bool success = await WeatherData.FetchWeatherData("3fb67a9d77", place);
 
             if (success)
             {
@@ -131,6 +134,7 @@ namespace WeatherApp2
             }
         }
 
+        // opens map
         private void btnMap_Click(object sender, RoutedEventArgs e)
         {
             map mapWindow = new map();
@@ -140,13 +144,14 @@ namespace WeatherApp2
 
 
 
-
+        // updates data when a place is chosen
         private void mapWindow_OnWindowClosing(object sender, CancelEventArgs e)
         {
             inputPlace.Text = map.City;
             LoadWeatherData();
         }
 
+        
         private void delayUp_Click(object sender, RoutedEventArgs e)
         {
             if (delay <= 999) { delay++; }
@@ -162,6 +167,7 @@ namespace WeatherApp2
             checkDelay();
         }
 
+        // forces numbers
         private void inputDelay_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key < Key.D0 || e.Key > Key.D9)
@@ -172,14 +178,14 @@ namespace WeatherApp2
 
         
 
-
+        // updates timer each tick
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             LoadWeatherData();
         }
 
         
-
+        // checks if the delay is a valid input
         private void checkDelay()
         {
             try
@@ -208,6 +214,7 @@ namespace WeatherApp2
             TimeSpan.FromMinutes(delay);
         }
 
+
         private void inputDelay_LostFocus(object sender, RoutedEventArgs e)
         {
             checkDelay();
@@ -217,5 +224,7 @@ namespace WeatherApp2
         {
             LoadWeatherData();
         }
+
+        
     }
 }
